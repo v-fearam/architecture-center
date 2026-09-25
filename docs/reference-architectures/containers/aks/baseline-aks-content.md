@@ -117,7 +117,7 @@ This subnet is a placeholder for a VPN gateway or an Azure ExpressRoute gateway.
 
 #### Subnet to host Azure Bastion
 
-This subnet is used for [Azure Bastion](/azure/bastion/bastion-overview). You can use Azure Bastion to securely access Azure resources without exposing the resources to the internet. This architecture uses Azure Bastion to securely connect to the AKS cluster's API server for management operations. The subnet is for management operations only.
+This subnet is used for [Azure Bastion](/azure/bastion/bastion-overview). You can use Azure Bastion to securely access Azure resources without exposing the resources to the internet. This architecture uses [Azure Bastion to securely connect to the AKS cluster's API server for management operations(/azure/bastion/bastion-connect-to-aks-private-cluster). The subnet is for management operations only.
 
 ### Spoke virtual network
 
