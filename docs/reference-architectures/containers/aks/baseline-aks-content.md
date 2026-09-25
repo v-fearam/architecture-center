@@ -109,7 +109,7 @@ Within the network, the architecture has three subnets.
 
 #### Subnet to host Azure Firewall
 
-[Azure Firewall](/azure/firewall/overview) is a managed firewall service. The Azure Firewall instance secures outbound network traffic. Without this layer of security, the traffic might communicate with a malicious, non-Microsoft service that could exfiltrate sensitive workload data. Use [Azure Firewall Manager](/azure/firewall-manager/overview) to centrally deploy and configure multiple Azure Firewall instances and manage Azure Firewall policies for this *hub virtual network* architecture type.
+[Azure Firewall](/azure/firewall/overview) is a managed firewall service. The Azure Firewall instance secures outbound network traffic. Without this layer of security, the traffic might communicate with a malicious, non-Microsoft service that could exfiltrate sensitive workload data. Use [Azure Firewall Manager](/azure/firewall-manager/overview) to centrally deploy and configure multiple Azure Firewall instances and manage Azure Firewall policies for this *hub virtual network* architecture type. For the endpoints and ports that the firewall must allow for an AKS cluster to function, see [Outbound network and FQDN rules for AKS clusters](/azure/aks/outbound-rules-control-egress).
 
 #### Subnet to host a gateway
 
