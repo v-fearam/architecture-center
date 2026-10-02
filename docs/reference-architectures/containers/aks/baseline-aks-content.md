@@ -558,6 +558,8 @@ For more information, see [Storage options for applications in AKS](/azure/aks/c
 
 An effective way to manage an AKS cluster is to enforce governance through policies. Kubernetes implements policies through OPA Gatekeeper. For AKS, deliver policies through Azure Policy. Each policy applies to all clusters in its scope. OPA Gatekeeper handles policy enforcement in the cluster and logs all policy checks. The policy changes aren't immediately reflected in your cluster, so expect some delays.
 
+For the complete list of built-in initiatives and policies for AKS, see [Azure Policy built-in definitions for AKS](/azure/aks/policy-reference). AKS also offers [deployment safeguards](/azure/aks/deployment-safeguards), which use Azure Policy to enforce a set of Kubernetes best practices.
+
 To manage your AKS clusters, you can use Azure Policy in several ways:
 
 - Prevent or restrict the deployment of AKS clusters in a resource group or subscription. Apply standards for your organization. For example, you can follow a naming convention or specify a tag.
@@ -568,13 +570,13 @@ A common example of where a policy can be useful is around governance and valida
 
 When you set policies, apply them based on the requirements of the workload. Consider these factors:
 
-- Decide whether to set a collection of policies, known as *initiatives*, or to choose individual policies. Azure Policy provides two built-in initiatives: basic and restricted. Each initiative is a collection of built-in policies applicable to an AKS cluster. We recommend that you select an initiative and choose other policies for the cluster and the resources, like Container Registry, Application Gateway, or Key Vault, which interact with the cluster. Choose policies based on the requirements of your organization.
+- Decide whether to set a collection of policies, known as *initiatives*, or to choose individual policies. Azure Policy provides built-in initiatives for AKS, such as the pod security baseline and restricted standards. Each initiative is a collection of built-in policies applicable to an AKS cluster. We recommend that you select an initiative and choose other policies for the cluster and the resources, like Container Registry, Application Gateway, or Key Vault, which interact with the cluster. Choose policies based on the requirements of your organization.
 
 - Decide if you want to *Audit* or *Deny* the action. In Audit mode, the action is allowed but flagged as **Non-Compliant**. Have processes to check noncompliant states at a regular cadence and take necessary action. In Deny mode, the action is blocked because it violates the policy. Be careful when you choose Deny mode, because it can be too restrictive for the workload to function.
 
 - Decide if you have areas in your workload that shouldn't be compliant by design. Azure Policy can specify Kubernetes namespaces that are exempt from policy enforcement. We recommend that you still apply policies in Audit mode so that you're aware of those instances.
 
-- Decide if you have requirements that aren't covered by the built-in policies. You can create a custom Azure Policy definition that applies your custom OPA Gatekeeper policies. Don't apply custom policies directly to the cluster. For more information, see [Create and assign custom policy definitions](/azure/aks/use-azure-policy#create-and-assign-a-custom-policy-definition).
+- Decide if you have requirements that aren't covered by the built-in policies. You can create a custom Azure Policy definition that applies your custom OPA Gatekeeper policies. Don't apply custom policies directly to the cluster. For more information, see [Create and assign custom policy definitions](/azure/aks/use-azure-policy#optional-create-and-assign-a-custom-policy-definition).
 
 - Decide if you have organization-wide requirements. If so, add those policies at the management group level. Your cluster should also assign its own workload-specific policies, even if your organization has generic policies.
 
@@ -582,7 +584,7 @@ When you set policies, apply them based on the requirements of the workload. Con
 
 The reference implementation enables Azure Policy when the AKS cluster is created. The restrictive initiative is assigned in Audit mode to gain visibility into noncompliance.
 
-The implementation also sets extra policies that aren't part of any built-in initiatives. Those policies are set in Deny mode. For example, there's a policy in place to make sure images are only pulled from the deployed Container Registry instance.
+The implementation also assigns individual policies beyond that initiative, and some are set in Deny mode. For example, there's a policy in place to make sure images are only pulled from the deployed Container Registry instance.
 
 Consider creating your own custom initiatives. Combine the policies that are applicable for your workload into a single assignment.
 
